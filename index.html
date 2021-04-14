@@ -782,6 +782,80 @@ delete from room where id = 0;
 <td>9</td>
 </tr>
 </tbody>
+</table>
+<h4 id="10">10</h4>
+<p>Вывести дни недели, по которым каждый учитель преподает каждый предмет</p>
+<pre><code class="sql">select day_of_week, subject.name, teacher.name as teacher_name from timetable right join teacher on timetable.id_teacher = teacher.id right join subject on timetable.id_subject = subject.id;
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>day_of_week</th>
+<th>name</th>
+<th>teacher_name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Математика</td>
+<td>Марья Ивановна</td>
+</tr>
+</tbody>
+</table>
+<h4 id="11">11</h4>
+<p>Вывести имена учеников и их оценки</p>
+<pre><code class="sql">select name, mark from pupil right join marks on marks.id_pupil = id;
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>mark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Михаил</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Михаил</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Александр</td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<h4 id="12">12</h4>
+<p>Вывести букву, номер кабинета и предмет, который в нем преподают</p>
+<pre><code class="sql">select letter, number, subject.name from room right join timetable on timetable.id_room = room.id right join subject on id_subject = subject.id;
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>letter</th>
+<th>number</th>
+<th>name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NULL</td>
+<td>215</td>
+<td>Математика</td>
+</tr>
+<tr>
+<td>NULL</td>
+<td>101</td>
+<td>Русский язык</td>
+</tr>
+</tbody>
 </table></div>
             </div>
         </div>
@@ -866,5 +940,5 @@ delete from room where id = 0;
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-04-14 11:36:24.820382+00:00
+Build Date UTC : 2021-04-14 11:54:37.568378+00:00
 -->
