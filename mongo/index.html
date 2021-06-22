@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Mongodb: процесс реализации модели - Расписание уроков – База данных PostgreSQL</title>
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/font-awesome.min.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+
+        <script src="../js/jquery-1.10.2.min.js" defer></script>
+        <script src="../js/bootstrap.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="..">Расписание уроков – База данных PostgreSQL</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem">
+                                <a href=".." class="nav-link">База данных Школьное расписание</a>
+                            </li>
+                            <li class="navitem active">
+                                <a href="./" class="nav-link">Mongodb: процесс реализации модели</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="../queries/" class="nav-link">Запросы</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href=".." class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../queries/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-level="1"><a href="#mongodb" class="nav-link">Mongodb: процесс реализации модели</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-level="2"><a href="#_1" class="nav-link">Продукты компаний</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_2" class="nav-link">Брокеры</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-level="2"><a href="#_3" class="nav-link">Сделки</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="mongodb">Mongodb: процесс реализации модели</h1>
+<h2 id="_1">Продукты компаний</h2>
+<pre><code class="javascript">db.products.insertOne({
+    'organization': 'Tinivini', 
+    'contacts': '8800552525', 
+    'goods_type': 'toy', 
+    'name': 'kite',
+    'manufacturer_date': new Date(&quot;2020-09-10&quot;), 
+    'shelf_life': new Date(&quot;2020-12-01&quot;), 
+    'price': 500
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c941e81da236716933dc55&quot;) }
+
+db.products.insertOne({
+    'organization': 'Asura', 
+    'contacts': '9982971', 
+    'goods_type': 'books', 
+    'name': 'Techno manga',
+    'manufacturer_date': new Date(&quot;2018-08-00&quot;), 
+    'shelf_life': new Date(&quot;2025-12-01&quot;), 
+    'price': 300
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c9423f1da236716933dc56&quot;) }
+
+db.products.insertOne({
+    'organization': 'Asura', 
+    'contacts': '9982971', 
+    'goods_type': 'books', 
+    'name': 'Elf manga',
+    'manufacturer_date': new Date(&quot;2019-08-00&quot;), 
+    'shelf_life': new Date(&quot;2026-12-01&quot;), 
+    'price': 350
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c942681da236716933dc57&quot;) }
+
+
+db.products.insertOne({
+    'organization': 'Nyam', 
+    'contacts': '9900071', 
+    'goods_type': 'cookie', 
+    'name': 'mini cookie',
+    'manufacturer_date': new Date(&quot;2017-08-00&quot;), 
+    'shelf_life': new Date(&quot;2018-12-01&quot;), 
+    'price': 100
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c94b7a1da236716933dc60&quot;) }
+
+db.products.insertOne({
+    'organization': 'Kansai', 
+    'contacts': '8929937', 
+    'goods_type': 'bed', 
+    'name': 'wooden bed',
+    'manufacturer_date': new Date(&quot;2015-10-00&quot;), 
+    'shelf_life': new Date(&quot;2022-12-01&quot;), 
+    'price': 10000
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c942b91da236716933dc58&quot;) }
+</code></pre>
+
+<h2 id="_2">Брокеры</h2>
+<pre><code class="javascript">db.broker.insertOne({
+    'company': 'Bestie', 
+    'contacts': '826397223', 
+    'name': 'Harly Joy', 
+    'income': new Date(&quot;2015-11-14&quot;)
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c943361da236716933dc59&quot;) }
+
+
+db.broker.insertOne({
+    'company': 'Bestie', 
+    'contacts': '826397223', 
+    'name': 'Mery Ly', 
+    'income': new Date(&quot;2020-07-14&quot;)
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c9435b1da236716933dc5a&quot;) }
+
+db.broker.insertOne({
+    'company': 'Shine', 
+    'contacts': '8887266610', 
+    'name': 'Jhon Shini', 
+    'income': new Date(&quot;2021-01-07&quot;)
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c943951da236716933dc5b&quot;) }
+
+db.broker.insertOne({
+    'company': 'Shine', 
+    'contacts': '8887266610', 
+    'name': 'Cary Smith', 
+    'income': new Date(&quot;2011-04-03&quot;)
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c943c31da236716933dc5c&quot;) }
+</code></pre>
+
+<h2 id="_3">Сделки</h2>
+<pre><code class="javascript">var id_product = db.products.findOne({'name': 'Elf manga'})._id
+var id_broker = db.broker.findOne({'name': 'Cary Smith'})._id
+db.deal.insertOne({
+    'date': new Date(&quot;2020-12-10&quot;), 
+    'customer_name': 'Mary Smith', 
+    'payment_status': true,
+    'payment_type': 'cash', 
+    'sum': 10000,
+    'batch': {
+        'conditions': 'something important', 
+        'quantity': 100, 
+        'product': new DBRef(&quot;products&quot;, id_product)
+    }, 
+    'broker': new DBRef('broker', id_broker)
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c944d71da236716933dc5d&quot;) }
+
+var id_product = db.products.findOne({'name': 'Techno manga'})._id
+var id_broker = db.broker.findOne({'name': 'Cary Smith'})._id
+db.deal.insertOne({
+    'date': new Date(&quot;2021-01-08&quot;), 
+    'customer_name': 'Mary Smith', 
+    'payment_status': true,
+    'payment_type': 'virtual', 
+    'sum': 1150000,
+    'batch': {
+        'conditions': 'something important', 
+        'quantity': 1150, 
+        'product': new DBRef(&quot;products&quot;, id_product)
+    }, 
+    'broker': new DBRef('broker', id_broker)
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c9452c1da236716933dc5e&quot;) }
+
+var id_product = db.products.findOne({'name': 'kite'})._id
+var id_broker = db.broker.findOne({'name': 'Harly Joy'})._id
+db.deal.insertOne({
+    'date': new Date(&quot;2020-12-29&quot;), 
+    'customer_name': 'James Right', 
+    'payment_status': true,
+    'payment_type': 'cash', 
+    'sum': 1958620,
+    'batch': {
+        'conditions': 'something important', 
+        'quantity': 1872, 
+        'product': new DBRef(&quot;products&quot;, id_product)
+    }, 
+    'broker': new DBRef('broker', id_broker)
+})
+{ acknowledged: true,
+  insertedId: ObjectId(&quot;60c945971da236716933dc5f&quot;) }
+
+
+
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>
+            var base_url = "..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../js/base.js" defer></script>
+        <script src="../search/main.js" defer></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>

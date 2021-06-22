@@ -24,9 +24,25 @@
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
                 <a class="navbar-brand" href=".">Расписание уроков – База данных PostgreSQL</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                 <!-- Expanded navigation -->
                 <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem active">
+                                <a href="." class="nav-link">База данных Школьное расписание</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="mongo/" class="nav-link">Mongodb: процесс реализации модели</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="queries/" class="nav-link">Запросы</a>
+                            </li>
+                        </ul>
 
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item">
@@ -34,6 +50,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="mongo/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -980,5 +1006,5 @@ delete from room where id = 0;
 
 <!--
 MkDocs version : 1.1.2
-Build Date UTC : 2021-04-14 12:06:46.995482+00:00
+Build Date UTC : 2021-06-22 10:51:50.597452+00:00
 -->
