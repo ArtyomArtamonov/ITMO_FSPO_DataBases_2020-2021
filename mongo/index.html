@@ -320,23 +320,22 @@ db.stats()
 }
 </code></pre>
 <h3 id="4">4. Список всех кабинетов на первом этаже</h3>
-<pre><code class="language-javascript">&gt; db.rooms.find({number: {$regex: &quot;1.*&quot;}}).pretty()
-{
-    &quot;_id&quot; : ObjectId(&quot;60d34b8f0b7a2a91dccf454b&quot;),
-    &quot;number&quot; : &quot;10a&quot;,
-    &quot;has_special_equipment&quot; : true,
-    &quot;teacher&quot; : DBRef(&quot;teachers&quot;, &quot;60d349db0b7a2a91dccf4549&quot;)
+<pre><code class="language-javascript">&gt; map
+function map(){
+    if(/1.*/.test(this.number)){
+        emit(this.number, 1);
+    }
 }
-{
-    &quot;_id&quot; : ObjectId(&quot;60d34ba50b7a2a91dccf454c&quot;),
-    &quot;number&quot; : &quot;10b&quot;,
-    &quot;has_special_equipment&quot; : true
+&gt; reduce
+function reduce(key, values){
+    var sum = 0;
+    for(var i in values){
+        sum += values[i];
+    }
+    return sum;
 }
-{
-    &quot;_id&quot; : ObjectId(&quot;60d34bac0b7a2a91dccf454d&quot;),
-    &quot;number&quot; : &quot;12&quot;,
-    &quot;has_special_equipment&quot; : false
-}
+&gt; db.rooms.mapReduce(map, reduce, {out: &quot;number&quot;})
+{ &quot;result&quot; : &quot;number&quot;, &quot;ok&quot; : 1 }
 </code></pre>
 <h3 id="5">5. Вывести список преподавателей, которые не являются классными руководителями</h3>
 <pre><code class="language-javascript">&gt; db.teachers.find({is_supervisor: true}).pretty()
@@ -360,6 +359,65 @@ db.stats()
     &quot;_id&quot; : ObjectId(&quot;60d349db0b7a2a91dccf4549&quot;),
     &quot;name&quot; : &quot;Milana&quot;,
     &quot;is_supervisor&quot; : false
+}
+
+</code></pre>
+<h3 id="6">6. Вывести все классы и их учителей</h3>
+<pre><code class="language-javascript">&gt; db.classes.aggregate([{$lookup: {from: &quot;teachers&quot;, localField: &quot;teacher['$id']&quot;, foreignField: &quot;_id&quot;, as: &quot;teacher&quot;}}]).pretty()
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34cd730c46204e05dac8b&quot;),
+    &quot;letter&quot; : &quot;A&quot;,
+    &quot;year&quot; : 5,
+    &quot;teacher&quot; : 
+        { 
+            &quot;_id&quot; : ObjectId(&quot;60d347b92d92972c5189fe11&quot;), 
+            &quot;name&quot; : &quot;Valentina&quot;, 
+            &quot;is_supervisor&quot; : true 
+        }
+}
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34cf330c46204e05dac8c&quot;),
+    &quot;letter&quot; : &quot;Б&quot;,
+    &quot;year&quot; : 9,
+    &quot;teacher&quot; : 
+        { 
+            &quot;_id&quot; : ObjectId(&quot;60d347b92d92972c5189fe11&quot;), 
+            &quot;name&quot; : &quot;Valentina&quot;, 
+            &quot;is_supervisor&quot; : true 
+        }
+}
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34cfe30c46204e05dac8d&quot;),
+    &quot;letter&quot; : &quot;В&quot;,
+    &quot;year&quot; : 8,
+    &quot;teacher&quot; :     
+        { 
+            &quot;_id&quot; : ObjectId(&quot;60d347b92d92972c5189fe11&quot;), 
+            &quot;name&quot; : &quot;Valentina&quot;, 
+            &quot;is_supervisor&quot; : true 
+        }
+}
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34d0630c46204e05dac8e&quot;),
+    &quot;letter&quot; : &quot;А&quot;,
+    &quot;year&quot; : 1,
+    &quot;teacher&quot; : 
+        { 
+            &quot;_id&quot; : ObjectId(&quot;60d347b92d92972c5189fe11&quot;), 
+            &quot;name&quot; : &quot;Valentina&quot;, 
+            &quot;is_supervisor&quot; : true 
+        }
+}
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34d0d30c46204e05dac8f&quot;),
+    &quot;letter&quot; : &quot;Д&quot;,
+    &quot;year&quot; : 3,
+    &quot;teacher&quot; : 
+        { 
+            &quot;_id&quot; : ObjectId(&quot;60d347b92d92972c5189fe11&quot;), 
+            &quot;name&quot; : &quot;Valentina&quot;, 
+            &quot;is_supervisor&quot; : true 
+        }
 }
 
 </code></pre></div>
