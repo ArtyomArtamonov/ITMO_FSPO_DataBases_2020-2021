@@ -318,6 +318,26 @@ db.stats()
     &quot;subject&quot; : DBRef(&quot;subjects&quot;, ObjectId(&quot;60d34d7657375ed5041fe3b0&quot;)),
     &quot;class&quot; : DBRef(&quot;classes&quot;, &quot;60d34cf330c46204e05dac8c&quot;)
 }
+</code></pre>
+<h3 id="4">4. Список всех кабинетов на первом этаже</h3>
+<pre><code class="language-javascript">&gt; db.rooms.find({number: {$regex: &quot;1.*&quot;}}).pretty()
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34b8f0b7a2a91dccf454b&quot;),
+    &quot;number&quot; : &quot;10a&quot;,
+    &quot;has_special_equipment&quot; : true,
+    &quot;teacher&quot; : DBRef(&quot;teachers&quot;, &quot;60d349db0b7a2a91dccf4549&quot;)
+}
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34ba50b7a2a91dccf454c&quot;),
+    &quot;number&quot; : &quot;10b&quot;,
+    &quot;has_special_equipment&quot; : true
+}
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34bac0b7a2a91dccf454d&quot;),
+    &quot;number&quot; : &quot;12&quot;,
+    &quot;has_special_equipment&quot; : false
+}
+
 </code></pre></div>
         </div>
 
