@@ -280,7 +280,45 @@ db.stats()
     &quot;count&quot; : 4
 }
 </code></pre>
-<h3 id="3">3. Вывести год и букву всех классов</h3></div>
+<h3 id="3">3. Вывод уроков в понедельник</h3>
+<pre><code class="language-javascript">&gt; db.timetable.find({day_of_week: 1}).pretty()
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34e3d57375ed5041fe3b3&quot;),
+    &quot;day_of_week&quot; : 1,
+    &quot;lesson_number&quot; : 1,
+    &quot;teacher&quot; : DBRef(&quot;teachers&quot;, &quot;60d3488c0b7a2a91dccf4547&quot;),
+    &quot;room&quot; : DBRef(&quot;rooms&quot;, &quot;60d34b8f0b7a2a91dccf454b&quot;),
+    &quot;subject&quot; : DBRef(&quot;subjects&quot;, ObjectId(&quot;60d34d7657375ed5041fe3b0&quot;)),
+    &quot;class&quot; : DBRef(&quot;classes&quot;, &quot;60d34d0d30c46204e05dac8f&quot;)
+}
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34e5957375ed5041fe3b4&quot;),
+    &quot;day_of_week&quot; : 1,
+    &quot;lesson_number&quot; : 2,
+    &quot;teacher&quot; : DBRef(&quot;teachers&quot;, &quot;60d3488c0b7a2a91dccf4547&quot;),
+    &quot;room&quot; : DBRef(&quot;rooms&quot;, &quot;60d34b8f0b7a2a91dccf454b&quot;),
+    &quot;subject&quot; : DBRef(&quot;subjects&quot;, ObjectId(&quot;60d34d7657375ed5041fe3b0&quot;)),
+    &quot;class&quot; : DBRef(&quot;classes&quot;, &quot;60d34cfe30c46204e05dac8d&quot;)
+}
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34e7357375ed5041fe3b5&quot;),
+    &quot;day_of_week&quot; : 1,
+    &quot;lesson_number&quot; : 3,
+    &quot;teacher&quot; : DBRef(&quot;teachers&quot;, &quot;60d3488c0b7a2a91dccf4547&quot;),
+    &quot;room&quot; : DBRef(&quot;rooms&quot;, &quot;60d34b8f0b7a2a91dccf454b&quot;),
+    &quot;subject&quot; : DBRef(&quot;subjects&quot;, ObjectId(&quot;60d34d7657375ed5041fe3b0&quot;)),
+    &quot;class&quot; : DBRef(&quot;classes&quot;, &quot;60d34d0630c46204e05dac8e&quot;)
+}
+{
+    &quot;_id&quot; : ObjectId(&quot;60d34e8357375ed5041fe3b6&quot;),
+    &quot;day_of_week&quot; : 1,
+    &quot;lesson_number&quot; : 4,
+    &quot;teacher&quot; : DBRef(&quot;teachers&quot;, &quot;60d3488c0b7a2a91dccf4547&quot;),
+    &quot;room&quot; : DBRef(&quot;rooms&quot;, &quot;60d34b8f0b7a2a91dccf454b&quot;),
+    &quot;subject&quot; : DBRef(&quot;subjects&quot;, ObjectId(&quot;60d34d7657375ed5041fe3b0&quot;)),
+    &quot;class&quot; : DBRef(&quot;classes&quot;, &quot;60d34cf330c46204e05dac8c&quot;)
+}
+</code></pre></div>
         </div>
 
         <footer class="col-md-12">
