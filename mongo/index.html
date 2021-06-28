@@ -337,6 +337,30 @@ db.stats()
     &quot;number&quot; : &quot;12&quot;,
     &quot;has_special_equipment&quot; : false
 }
+</code></pre>
+<h3 id="5">5. Вывести список преподавателей, которые не являются классными руководителями</h3>
+<pre><code class="language-javascript">&gt; db.teachers.find({is_supervisor: true}).pretty()
+{
+    &quot;_id&quot; : ObjectId(&quot;60d347b92d92972c5189fe11&quot;),
+    &quot;name&quot; : &quot;Valentina&quot;,
+    &quot;is_supervisor&quot; : true
+}
+&gt; db.teachers.find({is_supervisor: false}).pretty()
+{
+    &quot;_id&quot; : ObjectId(&quot;60d3488c0b7a2a91dccf4547&quot;),
+    &quot;name&quot; : &quot;Maria&quot;,
+    &quot;is_supervisor&quot; : false
+}
+{
+    &quot;_id&quot; : ObjectId(&quot;60d349d50b7a2a91dccf4548&quot;),
+    &quot;name&quot; : &quot;Valeria&quot;,
+    &quot;is_supervisor&quot; : false
+}
+{
+    &quot;_id&quot; : ObjectId(&quot;60d349db0b7a2a91dccf4549&quot;),
+    &quot;name&quot; : &quot;Milana&quot;,
+    &quot;is_supervisor&quot; : false
+}
 
 </code></pre></div>
         </div>
